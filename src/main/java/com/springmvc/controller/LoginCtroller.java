@@ -4,6 +4,8 @@ import com.springmvc.entity.Message;
 import com.springmvc.entity.User;
 import com.springmvc.service.MessageService;
 import com.springmvc.service.UserService;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @ResponseBody
 @Controller
@@ -64,5 +67,18 @@ public class LoginCtroller {
                 return "注册失败！";
             }
         }
+    }
+
+    @RequestMapping(value="/userList",produces = "application/json;charset=GBK")
+    public String userList() {
+        List<User> userList = userService.selectUserList();
+        JSONArray jsonArray = new JSONArray();
+        for (User u:userList) {
+            JSONObject jo = new JSONObject();
+            jo.put("id",u.getId());
+            jo.put("username",u.getUsername());
+            jsonArray.add(jo);
+        }
+        return jsonArray.toString();
     }
 }

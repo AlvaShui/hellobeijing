@@ -2,6 +2,8 @@ package com.springmvc.dao;
 
 import com.springmvc.entity.User;
 
+import java.util.List;
+
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -16,4 +18,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     User loginSql(User user);
+
+    List<User> selectUserList();
 }

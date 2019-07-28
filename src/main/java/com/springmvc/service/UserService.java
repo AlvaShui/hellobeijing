@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService implements IUserService{
 
@@ -45,5 +47,10 @@ public class UserService implements IUserService{
     @Override
     public User loginSql(User user) {
         return userMapper.loginSql(user);
+    }
+
+    @Override
+    public List<User> selectUserList() {
+        return userMapper.selectUserList();
     }
 }

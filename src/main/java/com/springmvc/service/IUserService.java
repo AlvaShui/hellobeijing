@@ -3,6 +3,8 @@ package com.springmvc.service;
 import com.springmvc.entity.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface IUserService {
     int deleteByPrimaryKey(Integer id);
@@ -18,4 +20,6 @@ public interface IUserService {
     int updateByPrimaryKey(User record);
 
     User loginSql(User user);
+
+    List<User> selectUserList();
 }
