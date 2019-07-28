@@ -2,6 +2,7 @@ package com.springmvc.service;
 
 import com.springmvc.dao.UserMapper;
 import com.springmvc.entity.User;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,10 @@ public class UserService implements IUserService{
     @Override
     public int updateByPrimaryKey(User record) {
         return userMapper.updateByPrimaryKey(record);
+    }
+
+    @Override
+    public User loginSql(User user) {
+        return userMapper.loginSql(user);
     }
 }

@@ -6,6 +6,7 @@ import com.springmvc.service.MessageService;
 import com.springmvc.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,13 +23,19 @@ public class LoginCtroller {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
-    @ResponseBody
-    public Message login(HttpServletRequest req) {
-//        messageService = new MessageService();
-        String id = req.getParameter("id");
-        int i = Integer.valueOf(id);
-        return messageService.selectByPrimaryKey(i);
+    @RequestMapping(value = "/login",method = RequestMethod.POST,produces = "application/json;charset=GBK")
+    public String login(HttpServletRequest req) {
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        User result = userService.loginSql(user);
+        if (result!=null) {
+            return "登录成功！";
+        }else {
+            return "用户名密码不正确！";
+        }
     }
 
     @ResponseBody

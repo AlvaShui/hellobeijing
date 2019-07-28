@@ -12,7 +12,7 @@
     <form method="post" action="/register">
         用户名:<input type="text" name="username"/><br/>
         密码:<input type="password" name="password"/><br/>
-        确认密码:<input type="password" name="password"/><br/>
+        确认密码:<input type="password" name="password1"/><br/>
         <input type="submit" value="提交"/>
     </form>
 </head>
